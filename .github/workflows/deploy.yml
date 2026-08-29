@@ -31,13 +31,11 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        working-directory: certs/ccar-foundations/quiz
         run: |
-          rm -f package-lock.json
+          rm -f package-lock.json certs/ccar-foundations/quiz/package-lock.json
           npm install
 
       - name: Build project
-        working-directory: certs/ccar-foundations/quiz
         run: npm run build
 
       - name: Setup Pages
