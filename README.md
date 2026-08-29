@@ -8,40 +8,30 @@ An open-source, comprehensive study and mastery hub for **Anthropic Claude Certi
 
 ---
 
-## 🧭 Certification Roadmap
+## 🧭 Certification Master Roadmap
 
-| Certification Track | Level | Exam Code | Status | Resources |
+| Certification Track | Level | Exam Code | Status | Comprehensive Resources |
 |---|---|---|---|---|
-| **Certified Claude Architect: Foundations** | Associate / Foundation | **CCAR-F** | 🟢 **Complete & Active** | [Study Guide](./certs/ccar-foundations/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live Quiz App](https://cemendes.github.io/anthropic-claude-certifications/) |
-| **Certified Claude Architect: Advanced** | Professional | **CCAR-A** | 🟡 *In Development* | Coming Soon |
-| **Claude Agentic Specialist** | Specialty | **CCAS** | 🟡 *In Development* | Coming Soon |
+| **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟡 **Active Track** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
+| **Claude Certified Architect: Foundations** | Associate / Foundation | **CCAR-F** | 🟢 **Passed (854/1000)** | [Study Guides](./certs/ccar-foundations/study-guide/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live Quiz App](https://cemendes.github.io/anthropic-claude-certifications/) |
+| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | ⚪ *Scheduled (Aug 30)* | In Progress |
+| **Claude Certified Architect: Professional** | Professional | **CCAR-P** | ⚪ *Scheduled (Sep 5)* | In Progress |
 
 ---
 
-## 📚 Flagship Track: CCAR-F (Foundations)
+## 📚 Certification Tracks Breakdown
 
-The **Certified Claude Architect: Foundations (CCAR-F)** validates practical expertise in building production-grade LLM applications, autonomous agentic loops, Claude Code configuration, prompt engineering, Model Context Protocol (MCP) integrations, and context reliability.
+### 1. 🟡 [CCAO-F: Associate Foundations](./certs/ccao-foundations/)
+* Core mastery of Claude Web & Desktop, Artifacts lifecycle ($\ge 15$ lines, visual components, documents), Projects knowledge bases, Custom Instructions, Team workspaces, and Multimodal Vision.
 
-### 🌟 What's Included:
-1. **[Interactive Practice Exam App (100 Questions)](https://cemendes.github.io/anthropic-claude-certifications/)**:
-   * **Study Mode**: Instant validation, code snippets, and in-depth Tutorials Dojo-style explanations.
-   * **Exam Simulation**: 60 randomized questions with a 120-minute timer.
-   * **Review Mode**: Flagged question triage and Markdown review export.
-   * **Persistent State**: Full `localStorage` auto-save and lifetime accuracy metrics.
-2. **[Comprehensive Study Guides](./certs/ccar-foundations/study-guide/)**:
-   * [Domain 1: Agentic Architecture & Orchestration (27%)](./certs/ccar-foundations/study-guide/domain-1-agentic-orchestration.md)
-   * [Domain 2: Claude Code Configuration & Workflows (20%)](./certs/ccar-foundations/study-guide/domain-2-claude-code-workflows.md)
-   * [Domain 3: Prompt Engineering & Structured Output (20%)](./certs/ccar-foundations/study-guide/domain-3-prompt-engineering.md)
-   * [Domain 4: Tool Design & MCP Integration (18%)](./certs/ccar-foundations/study-guide/domain-4-mcp-tool-design.md)
-   * [Domain 5: Context Management & Reliability (15%)](./certs/ccar-foundations/study-guide/domain-5-context-management.md)
-3. **[Fast-Lookup Cheat Sheets](./certs/ccar-foundations/cheat-sheets/)**:
-   * [The 5 Anthropic Workflow Patterns Matrix](./certs/ccar-foundations/cheat-sheets/workflow-patterns-matrix.md)
-   * [MCP Primitives & Transports Guide](./certs/ccar-foundations/cheat-sheets/mcp-primitives-and-transports.md)
-   * [Prompt Caching Constraints & Traps](./certs/ccar-foundations/cheat-sheets/prompt-caching-rules.md)
-   * [Anthropic Messages API & Stop Reasons](./certs/ccar-foundations/cheat-sheets/messages-api-stop-reasons.md)
-   * [Claude Code Settings & Directory Hierarchy](./certs/ccar-foundations/cheat-sheets/claude-code-hierarchy-cheatsheet.md)
-4. **[Tech Talk Slide Deck (Marp Markdown)](./certs/ccar-foundations/presentation/slides.md)**:
-   * Ready-to-present technical deck for customer engineering sessions, team training, and community presentations.
+### 2. 🟢 [CCAR-F: Architect Foundations](./certs/ccar-foundations/)
+* Production architecture, Agentic Loops (`stop_reason: tool_use`), 5 Workflow Patterns, `CLAUDE.md` hierarchy, Model Context Protocol (MCP), Prompt Caching exact prefix rules, and Context Reliability. Includes the **100-Question Interactive Practice App**.
+
+### 3. ⚪ CCDV-F: Developer Foundations *(Coming Tomorrow)*
+* Messages API, Tool Calling (`tool_choice`), JSON Schemas, Pydantic, SDK integrations, Prompt Caching, and Streaming SSE.
+
+### 4. ⚪ CCAR-P: Architect Professional *(Coming Next Weekend)*
+* Enterprise Multi-Agent Swarms, Production MCP over SSE with OAuth 2.0, Multi-Cloud Failover (Vertex AI / Bedrock / Direct API), Zero Data Retention (ZDR), and Evals-as-Code.
 
 ---
 
@@ -55,7 +45,7 @@ cd anthropic-claude-certifications
 # Install dependencies in the monorepo
 npm install
 
-# Run the CCAR-F practice quiz app locally
+# Run the practice quiz app locally
 npm run dev
 ```
 
@@ -88,4 +78,4 @@ Customer Engineer @ Google
 
 ## 📄 License
 
-MIT License — Feel free to use for personal study, corporate training, and community education.
+MIT License — Free to use for personal study, corporate training, and community education.
