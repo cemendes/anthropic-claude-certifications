@@ -12,17 +12,17 @@ An open-source, comprehensive study and mastery hub for **Anthropic Claude Certi
 
 | Certification Track | Level | Exam Code | Status | Comprehensive Resources |
 |---|---|---|---|---|
-| **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟡 **Active Track** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
+| **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟢 **Passed (967/1000)** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
 | **Claude Certified Architect: Foundations** | Associate / Foundation | **CCAR-F** | 🟢 **Passed (854/1000)** | [Study Guides](./certs/ccar-foundations/study-guide/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live Quiz App](https://cemendes.github.io/anthropic-claude-certifications/) |
-| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | ⚪ *Scheduled (Aug 30)* | In Progress |
+| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | 🟡 **Active / Next (Aug 30)** | In Progress |
 | **Claude Certified Architect: Professional** | Professional | **CCAR-P** | ⚪ *Scheduled (Sep 5)* | In Progress |
 
 ---
 
 ## 📚 Certification Tracks Breakdown
 
-### 1. 🟡 [CCAO-F: Associate Foundations](./certs/ccao-foundations/)
-* Core mastery of Claude Web & Desktop, Artifacts lifecycle ($\ge 15$ lines, visual components, documents), Projects knowledge bases, Custom Instructions, Team workspaces, and Multimodal Vision.
+### 1. 🟢 [CCAO-F: Associate Foundations](./certs/ccao-foundations/)
+* Core mastery of Claude Web & Desktop, Artifacts lifecycle ($\ge 15$ lines, visual components, documents), Projects knowledge bases, Custom Instructions, Team workspaces, and Multimodal Vision. (Score: **967 / 1000**).
 
 ### 2. 🟢 [CCAR-F: Architect Foundations](./certs/ccar-foundations/)
 * Production architecture, Agentic Loops (`stop_reason: tool_use`), 5 Workflow Patterns, `CLAUDE.md` hierarchy, Model Context Protocol (MCP), Prompt Caching exact prefix rules, and Context Reliability. Includes the **100-Question Interactive Practice App**.
