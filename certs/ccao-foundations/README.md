@@ -20,9 +20,10 @@ The **CCAO-F** validates foundational, day-to-day operational mastery of the Cla
 ## 🎯 Scoring & Format
 
 * **Format**: ~45-60 Multiple-Choice Questions (Single & Multi-Select).
-* **Time Limit**: 90-120 Minutes.
+* **Time Limit**: 120 Minutes (Average completion time: ~60 minutes).
+* **Style & Dynamics**: Concisely phrased questions with focused distractors; direct and fast-paced compared to architecture scenarios.
 * **Delivery**: Online proctored or authorized test center.
-* **Target Audience**: Business professionals, technical leads, Customer Engineers, and power users leveraging Claude for enterprise workflows.
+* **Target Audience**: Business professionals, technical leads, Customer Engineers, and power users seeking a solid baseline in safe AI usage, core features, and prompting fundamentals.
 
 ---
 
