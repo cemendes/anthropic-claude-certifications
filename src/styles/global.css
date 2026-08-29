@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #131315;
+  --color-card-1: #1F2021;       /* surface-container */
+  --color-card-2: #292A2B;       /* surface-container-high */
+  --color-surface-lowest: #0D0E10;
+  --color-surface-low: #1B1C1D;
+  --color-surface-high: #292A2B;
+  --color-surface-highest: #343536;
+  --color-border: #43474C;       /* outline-variant */
+  --color-primary: #B5C8DF;      /* light steel blue */
+  --color-primary-container: #2C3E50;  /* dark slate */
+  --color-on-primary-container: #96A9BE;
+  --color-on-surface: #E4E2E3;
+  --color-on-surface-variant: #C4C6CD;
+  --color-outline: #8E9197;
+  --color-outline-variant: #43474C;
+  --color-correct: #10B981;
+  --color-incorrect: #FFB4AB;    /* error */
+  --color-tertiary: #E3C19B;
+  --color-tertiary-container: #4E381C;
+  --color-domain-1: #2C3E50;
+  --color-domain-2: #4A6B8C;
+  --color-domain-3: #437563;
+  --color-domain-4: #8C704A;
+  --color-domain-5: #FFB4AB;     /* use error color */
+  --color-error: #FFB4AB;
+  --color-error-container: #93000A;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-on-surface);
+  font-family: 'Inter', sans-serif;
+}
