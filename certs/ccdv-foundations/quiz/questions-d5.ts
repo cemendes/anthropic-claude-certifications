@@ -22,7 +22,7 @@ export const questions: Question[] = [
       D: 'Schema validation errors return HTTP 400 InvalidRequestError.',
     },
     references: [
-      { title: 'Anthropic Error Codes', url: 'https://docs.anthropic.com/en/api/errors' },
+      { title: 'Anthropic Error Codes', url: 'https://docs.anthropic.com/en/api/errors' }
     ]
   },
   {
@@ -46,7 +46,7 @@ export const questions: Question[] = [
       D: 'Temperature 0.0 does not trigger infinite loops.',
     },
     references: [
-      { title: 'Stop Reasons in Anthropic API', url: 'https://docs.anthropic.com/en/docs/build-with-claude/messages-api#response-parameters' },
+      { title: 'Stop Reasons in Anthropic API', url: 'https://docs.anthropic.com/en/docs/build-with-claude/messages-api#response-parameters' }
     ]
   },
   {
@@ -70,7 +70,7 @@ export const questions: Question[] = [
       D: 'x-api-throttle-wait is non-standard.',
     },
     references: [
-      { title: 'Rate Limits & Error Handling', url: 'https://docs.anthropic.com/en/api/rate-limits' },
+      { title: 'Rate Limits & Error Handling', url: 'https://docs.anthropic.com/en/api/rate-limits' }
     ]
   },
   {
@@ -94,7 +94,7 @@ export const questions: Question[] = [
       D: 'Word count regex does not measure semantic correctness or safety.',
     },
     references: [
-      { title: 'Evaluate Your Prompt', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/evaluate-prompts' },
+      { title: 'Evaluate Your Prompt', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/evaluate-prompts' }
     ]
   },
   {
@@ -118,7 +118,7 @@ export const questions: Question[] = [
       D: 'Jitter is a client-side network retry delay, unrelated to sampling temperature.',
     },
     references: [
-      { title: 'Exponential Backoff and Jitter', url: 'https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/' },
+      { title: 'Exponential Backoff and Jitter', url: 'https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/' }
     ]
   },
   {
@@ -142,7 +142,151 @@ export const questions: Question[] = [
       D: 'Most 4xx errors are permanent client errors; only 429 is retryable.',
     },
     references: [
-      { title: 'Anthropic Errors', url: 'https://docs.anthropic.com/en/api/errors' },
+      { title: 'Anthropic Errors', url: 'https://docs.anthropic.com/en/api/errors' }
+    ]
+  },
+  {
+    id: 507,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: 'An application uses Anthropic API to classify user tickets. The team wants to test if updating the system prompt degrades accuracy across 500 edge cases.',
+    question: 'What is the industry-standard workflow for regression testing LLM prompts?',
+    options: [
+      { label: 'A', text: 'Run automated offline evaluations against a versioned ground-truth dataset with deterministic assertions and LLM-as-a-judge scoring before deploying prompt changes to production.' },
+      { label: 'B', text: 'Deploy the prompt to 100% of users and wait for user complaints.' },
+      { label: 'C', text: 'Manually inspect 2 examples in the web UI console.' },
+      { label: 'D', text: 'Unit test only the client HTTP connection.' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Offline Prompt Regression Testing (Evals-as-Code)',
+    explanation: 'Evals-as-code involves maintaining a gold standard evaluation dataset and running deterministic/LLM-graded test suites in CI/CD before any prompt or model version changes go live.',
+    distractorAnalysis: {
+      B: 'Testing in production without evals risks catastrophic regressions for end users.',
+      C: '2 examples provide zero statistical confidence across 500 edge cases.',
+      D: 'Testing only HTTP connections does not evaluate model behavioral accuracy.',
+    },
+    references: [
+      { title: 'Evaluate Prompts', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/evaluate-prompts' }
+    ]
+  },
+  {
+    id: 508,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: "A developer receives an error with `type: 'authentication_error'` and `message: 'invalid x-api-key'`.",
+    question: 'What HTTP status code is returned for this authentication failure?',
+    options: [
+      { label: 'A', text: 'HTTP 401 Unauthorized' },
+      { label: 'B', text: 'HTTP 403 Forbidden' },
+      { label: 'C', text: 'HTTP 400 Bad Request' },
+      { label: 'D', text: 'HTTP 404 Not Found' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'HTTP 401 Authentication Error',
+    explanation: "Missing, malformed, or invalid `x-api-key` headers always return `HTTP 401 Unauthorized` with `type: 'authentication_error'`.",
+    distractorAnalysis: {
+      B: '403 indicates permission/tier restrictions on a valid key.',
+      C: '400 indicates malformed payload bodies.',
+      D: '404 indicates non-existent endpoints or invalid model identifiers.',
+    },
+    references: [
+      { title: 'API Errors', url: 'https://docs.anthropic.com/en/api/errors' }
+    ]
+  },
+  {
+    id: 509,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: 'What is the difference between Tokens Per Minute (TPM) rate limits and Requests Per Minute (RPM) rate limits in the Anthropic platform?',
+    question: 'How do RPM and TPM constraints operate independently?',
+    options: [
+      { label: 'A', text: 'RPM caps the count of API requests regardless of payload size; TPM caps the total cumulative input and output tokens consumed in a 60-second window.' },
+      { label: 'B', text: 'RPM and TPM are identical metrics.' },
+      { label: 'C', text: 'TPM only counts output tokens.' },
+      { label: 'D', text: 'RPM only applies to streaming requests.' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'RPM vs TPM Rate Limiting Dynamics',
+    explanation: 'Rate limits enforce dual independent constraints: RPM (rate of requests) and TPM (volume of tokens processed). Exceeding either limit triggers an HTTP 429.',
+    distractorAnalysis: {
+      B: 'They measure distinct resources (request count vs token volume).',
+      C: 'TPM includes input tokens, cache tokens, and output tokens.',
+      D: 'RPM applies equally to sync, async, and streaming requests.',
+    },
+    references: [
+      { title: 'Anthropic Rate Limits', url: 'https://docs.anthropic.com/en/api/rate-limits' }
+    ]
+  },
+  {
+    id: 510,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: 'An engineer needs to test that Claude refuses to generate harmful or unauthorized content according to safety boundaries.',
+    question: 'Which evaluation metric measures whether the model correctly declines prohibited queries without false positives on benign edge cases?',
+    options: [
+      { label: 'A', text: 'Refusal / Safety Conformance Evaluation (measuring True Refusal Rate vs False Refusal / Over-refusal Rate)' },
+      { label: 'B', text: 'Token per second throughput' },
+      { label: 'C', text: 'BLEU score against reference text' },
+      { label: 'D', text: 'JSON parsing speed' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Safety & Refusal Evaluation Metrics',
+    explanation: 'Evaluating safety guardrails requires measuring both True Refusals (correctly refusing harmful prompts) and False Refusals (unnecessarily refusing harmless benign prompts that contain sensitive keywords).',
+    distractorAnalysis: {
+      B: 'Throughput measures performance, not safety adherence.',
+      C: 'BLEU score measures n-gram overlap in translation, not safety boundaries.',
+      D: 'JSON speed measures parse latency.',
+    },
+    references: [
+      { title: 'Model Evaluation Strategies', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/evaluate-prompts' }
+    ]
+  },
+  {
+    id: 511,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: 'During client execution, an unhandled network disconnection occurs mid-request before receiving the first byte of response.',
+    question: 'Which exception class in the Anthropic Python SDK represents this network-level communication failure?',
+    options: [
+      { label: 'A', text: '`anthropic.APIConnectionError`' },
+      { label: 'B', text: '`anthropic.BadRequestError`' },
+      { label: 'C', text: '`anthropic.AuthenticationError`' },
+      { label: 'D', text: '`anthropic.RateLimitError`' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Anthropic SDK Exception Hierarchy (APIConnectionError)',
+    explanation: 'Network timeouts, DNS resolution failures, and dropped socket connections raise `anthropic.APIConnectionError`, which inherits from `anthropic.APIError` and is safe to retry.',
+    distractorAnalysis: {
+      B: 'BadRequestError is raised on HTTP 400 responses.',
+      C: 'AuthenticationError is raised on HTTP 401 responses.',
+      D: 'RateLimitError is raised on HTTP 429 responses.',
+    },
+    references: [
+      { title: 'Python SDK Exception Hierarchy', url: 'https://github.com/anthropics/anthropic-sdk-python' }
+    ]
+  },
+  {
+    id: 512,
+    domain: 5,
+    domainName: 'Error Handling, Rate Limits & Evaluation',
+    scenario: 'When building an evaluation rubric for an LLM-as-a-judge prompt, which scoring design produces the most consistent and calibrated evaluations?',
+    question: 'What is the recommended design for LLM judge rubrics?',
+    options: [
+      { label: 'A', text: 'Provide clear categorical criteria with concrete scoring anchors (e.g. 1-5 scale where each score has an explicit definition and example), requiring Chain-of-Thought reasoning before outputting the score.' },
+      { label: 'B', text: 'Ask the model to output a floating point number between 0.0 and 100.0 with no guidelines.' },
+      { label: 'C', text: 'Tell the model to give high scores to friendly answers.' },
+      { label: 'D', text: 'Use temperature 1.0 to get diverse opinions.' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Calibrated LLM-as-a-Judge Rubric Design',
+    explanation: 'High-quality LLM-as-a-judge systems require explicit anchor definitions for each score point and mandatory Chain-of-Thought reasoning prior to emitting the numerical evaluation.',
+    distractorAnalysis: {
+      B: 'Uncalibrated 0-100 scales produce erratic variance.',
+      C: 'Subjective friendliness instructions bias the judge away from factual accuracy.',
+      D: 'Evaluation judges should use temperature 0.0 for deterministic scoring.',
+    },
+    references: [
+      { title: 'Evaluate Prompts', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/evaluate-prompts' }
     ]
   },
 ];

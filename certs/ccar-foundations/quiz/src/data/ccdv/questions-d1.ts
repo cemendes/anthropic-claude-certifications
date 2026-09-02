@@ -22,7 +22,7 @@ export const questions: Question[] = [
       D: 'The API will fail closed and reject the request immediately before inference.',
     },
     references: [
-      { title: 'Anthropic Messages API Reference', url: 'https://docs.anthropic.com/en/api/messages' },
+      { title: 'Anthropic Messages API Reference', url: 'https://docs.anthropic.com/en/api/messages' }
     ]
   },
   {
@@ -46,7 +46,7 @@ export const questions: Question[] = [
       D: 'The metadata field does not take system instructions.',
     },
     references: [
-      { title: 'Anthropic System Prompts', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts' },
+      { title: 'Anthropic System Prompts', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts' }
     ]
   },
   {
@@ -70,7 +70,7 @@ export const questions: Question[] = [
       D: 'stream_chunk is not a valid Anthropic SSE event.',
     },
     references: [
-      { title: 'Streaming Messages', url: 'https://docs.anthropic.com/en/api/messages-streaming' },
+      { title: 'Streaming Messages', url: 'https://docs.anthropic.com/en/api/messages-streaming' }
     ]
   },
   {
@@ -94,7 +94,7 @@ export const questions: Question[] = [
       D: 'Token counting is done via the messages.count_tokens API endpoint.',
     },
     references: [
-      { title: 'Token Counting API', url: 'https://docs.anthropic.com/en/api/messages-count-tokens' },
+      { title: 'Token Counting API', url: 'https://docs.anthropic.com/en/api/messages-count-tokens' }
     ]
   },
   {
@@ -118,7 +118,7 @@ export const questions: Question[] = [
       D: 'Anthropic recommends altering either temperature or top_p, not both, and 0.5 still introduces stochasticity.',
     },
     references: [
-      { title: 'Anthropic Sampling Parameters', url: 'https://docs.anthropic.com/en/api/messages' },
+      { title: 'Anthropic Sampling Parameters', url: 'https://docs.anthropic.com/en/api/messages' }
     ]
   },
   {
@@ -142,7 +142,7 @@ export const questions: Question[] = [
       D: 'The API does not parse raw HTML <img> tags for vision inputs.',
     },
     references: [
-      { title: 'Vision with Claude', url: 'https://docs.anthropic.com/en/docs/build-with-claude/vision' },
+      { title: 'Vision with Claude', url: 'https://docs.anthropic.com/en/docs/build-with-claude/vision' }
     ]
   },
   {
@@ -166,7 +166,7 @@ export const questions: Question[] = [
       D: 'max_tokens sets a hard numeric token limit, not a delimiter-based cutoff.',
     },
     references: [
-      { title: 'Anthropic API Parameters', url: 'https://docs.anthropic.com/en/api/messages' },
+      { title: 'Anthropic API Parameters', url: 'https://docs.anthropic.com/en/api/messages' }
     ]
   },
   {
@@ -190,7 +190,7 @@ export const questions: Question[] = [
       D: 'Builder-style chaining is not used for core client options.',
     },
     references: [
-      { title: 'Anthropic TypeScript SDK', url: 'https://github.com/anthropics/anthropic-sdk-typescript' },
+      { title: 'Anthropic TypeScript SDK', url: 'https://github.com/anthropics/anthropic-sdk-typescript' }
     ]
   },
   {
@@ -214,7 +214,7 @@ export const questions: Question[] = [
       D: 'ParallelClient does not exist in the SDK.',
     },
     references: [
-      { title: 'Async Python SDK', url: 'https://github.com/anthropics/anthropic-sdk-python' },
+      { title: 'Async Python SDK', url: 'https://github.com/anthropics/anthropic-sdk-python' }
     ]
   },
   {
@@ -238,7 +238,7 @@ export const questions: Question[] = [
       D: 'metadata is for client tracking, not billing metrics.',
     },
     references: [
-      { title: 'Anthropic Messages API Reference', url: 'https://docs.anthropic.com/en/api/messages' },
+      { title: 'Anthropic Messages API Reference', url: 'https://docs.anthropic.com/en/api/messages' }
     ]
   },
   {
@@ -262,7 +262,7 @@ export const questions: Question[] = [
       D: 'accumulatedText is not a property on the stream object.',
     },
     references: [
-      { title: 'TypeScript Streaming Helpers', url: 'https://github.com/anthropics/anthropic-sdk-typescript' },
+      { title: 'TypeScript Streaming Helpers', url: 'https://github.com/anthropics/anthropic-sdk-typescript' }
     ]
   },
   {
@@ -286,7 +286,79 @@ export const questions: Question[] = [
       D: 'Anthropic returns 400 invalid_request_error, not 422.',
     },
     references: [
-      { title: 'Anthropic Messages API', url: 'https://docs.anthropic.com/en/api/messages' },
+      { title: 'Anthropic Messages API', url: 'https://docs.anthropic.com/en/api/messages' }
+    ]
+  },
+  {
+    id: 113,
+    domain: 1,
+    domainName: 'Anthropic Messages API & SDKs',
+    scenario: 'A developer needs to configure custom HTTP headers (such as an organization header or beta feature flag) on an individual API call without re-instantiating the Anthropic client.',
+    question: 'How can custom request headers be passed in the Python SDK `client.messages.create()` call?',
+    options: [
+      { label: 'A', text: "Pass `extra_headers={'anthropic-beta': 'prompt-caching-2024-07-31'}` directly in create()." },
+      { label: 'B', text: "Modify `os.environ['ANTHROPIC_HEADERS']` before every function execution." },
+      { label: 'C', text: 'Headers can only be set globally during client initialization.' },
+      { label: 'D', text: "Pass `headers={'anthropic-beta': '...'}` inside the messages list dictionary." },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Per-Request Header Overrides with extra_headers',
+    explanation: 'Anthropic SDKs support per-request configuration overrides including `extra_headers`, `extra_query`, and `timeout` passed directly into method calls like `messages.create()`.',
+    distractorAnalysis: {
+      B: 'Mutating environment variables at runtime is error-prone and not thread-safe.',
+      C: 'Per-request overrides are fully supported via extra_headers.',
+      D: 'Request headers belong in request options, not inside the conversation messages array.',
+    },
+    references: [
+      { title: 'Anthropic Python SDK Configuration', url: 'https://github.com/anthropics/anthropic-sdk-python' }
+    ]
+  },
+  {
+    id: 114,
+    domain: 1,
+    domainName: 'Anthropic Messages API & SDKs',
+    scenario: 'You are implementing low-level SSE parser logic. You receive the SSE event `message_delta`.',
+    question: 'Which crucial termination information is delivered inside the `message_delta` event?',
+    options: [
+      { label: 'A', text: '`delta.stop_reason` and `usage.output_tokens`' },
+      { label: 'B', text: 'The entire model prompt text' },
+      { label: 'C', text: 'The client API key confirmation' },
+      { label: 'D', text: 'The system prompt echo' },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'SSE message_delta Payload Structure',
+    explanation: 'The `message_delta` event fires towards the end of a stream to communicate completion properties: the final `stop_reason`, `stop_sequence` (if any), and cumulative `usage.output_tokens`.',
+    distractorAnalysis: {
+      B: 'Prompt text is not echoed in message_delta.',
+      C: 'API keys are never echoed back in SSE streams.',
+      D: 'System prompts are never echoed in delta events.',
+    },
+    references: [
+      { title: 'Anthropic Streaming Protocol', url: 'https://docs.anthropic.com/en/api/messages-streaming' }
+    ]
+  },
+  {
+    id: 115,
+    domain: 1,
+    domainName: 'Anthropic Messages API & SDKs',
+    scenario: 'An enterprise developer needs to send a PDF document to Claude 3.5 Sonnet for document question-answering.',
+    question: 'Which content block type is used to supply native PDF document pages to the Messages API?',
+    options: [
+      { label: 'A', text: "`{'type': 'document', 'source': {'type': 'base64', 'media_type': 'application/pdf', 'data': '...'}}`" },
+      { label: 'B', text: "`{'type': 'file', 'path': '/docs/annual_report.pdf'}`" },
+      { label: 'C', text: "`{'type': 'raw_pdf', 'data': '...'}`" },
+      { label: 'D', text: "`{'type': 'binary', 'encoding': 'pdf'}`" },
+    ],
+    correctAnswer: 'A',
+    keyConcept: 'Native PDF Document Content Blocks',
+    explanation: "Anthropic Messages API supports PDF processing using the `document` content block type with base64 source specification and `media_type: 'application/pdf'`.",
+    distractorAnalysis: {
+      B: 'Local filesystem paths are not accessible directly by cloud APIs; data must be base64-encoded.',
+      C: 'raw_pdf is not a valid schema type name.',
+      D: 'binary is not a recognized content block type.',
+    },
+    references: [
+      { title: 'PDF Support in Claude', url: 'https://docs.anthropic.com/en/docs/build-with-claude/pdf-support' }
     ]
   },
 ];
