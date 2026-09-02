@@ -14,7 +14,7 @@ An open-source, comprehensive study and mastery hub for **Anthropic Claude Certi
 |---|---|---|---|---|
 | **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟢 **Passed (967/1000)** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
 | **Claude Certified Architect: Foundations** | Associate / Foundation | **CCAR-F** | 🟢 **Passed (854/1000)** | [Study Guides](./certs/ccar-foundations/study-guide/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live Quiz App](https://cemendes.github.io/anthropic-claude-certifications/) |
-| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | 🟡 **Active / Next (Aug 30)** | In Progress |
+| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | 🟢 **Ready / Complete** | [Study Guides](./certs/ccdv-foundations/study-guide/), [Cheat Sheets](./certs/ccdv-foundations/cheat-sheets/), [Slides](./certs/ccdv-foundations/presentation/slides.md), [Track README](./certs/ccdv-foundations/) |
 | **Claude Certified Architect: Professional** | Professional | **CCAR-P** | ⚪ *Scheduled (Sep 5)* | In Progress |
 
 ---
@@ -27,8 +27,8 @@ An open-source, comprehensive study and mastery hub for **Anthropic Claude Certi
 ### 2. 🟢 [CCAR-F: Architect Foundations](./certs/ccar-foundations/)
 * Production architecture, Agentic Loops (`stop_reason: tool_use`), 5 Workflow Patterns, `CLAUDE.md` hierarchy, Model Context Protocol (MCP), Prompt Caching exact prefix rules, and Context Reliability. Includes the **100-Question Interactive Practice App**.
 
-### 3. ⚪ CCDV-F: Developer Foundations *(Coming Tomorrow)*
-* Messages API, Tool Calling (`tool_choice`), JSON Schemas, Pydantic, SDK integrations, Prompt Caching, and Streaming SSE.
+### 3. 🟢 [CCDV-F: Developer Foundations](./certs/ccdv-foundations/)
+* Messages API architecture, Tool Calling (`tool_choice`), JSON Schemas, Pydantic, assistant prefilling for pure JSON, Prompt Caching token thresholds, Streaming SSE, and resilient error handling (429/529 retries with jitter).
 
 ### 4. ⚪ CCAR-P: Architect Professional *(Coming Next Weekend)*
 * Enterprise Multi-Agent Swarms, Production MCP over SSE with OAuth 2.0, Multi-Cloud Failover (Vertex AI / Bedrock / Direct API), Zero Data Retention (ZDR), and Evals-as-Code.
