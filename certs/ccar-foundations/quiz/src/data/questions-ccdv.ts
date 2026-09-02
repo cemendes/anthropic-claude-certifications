@@ -1,16 +1,16 @@
 import type { Question } from '../types';
-import { questionsD1 } from './ccdv/questions-d1';
-import { questionsD2 } from './ccdv/questions-d2';
-import { questionsD3 } from './ccdv/questions-d3';
-import { questionsD4 } from './ccdv/questions-d4';
-import { questionsD5 } from './ccdv/questions-d5';
+import { questions as d1 } from './ccdv/questions-d1';
+import { questions as d2 } from './ccdv/questions-d2';
+import { questions as d3 } from './ccdv/questions-d3';
+import { questions as d4 } from './ccdv/questions-d4';
+import { questions as d5 } from './ccdv/questions-d5';
 
 export const ccdvQuestions: Question[] = [
-  ...questionsD1,
-  ...questionsD2,
-  ...questionsD3,
-  ...questionsD4,
-  ...questionsD5,
+  ...d1,
+  ...d2,
+  ...d3,
+  ...d4,
+  ...d5,
 ];
 
 export const CCDV_DOMAIN_NAMES: Record<number, string> = {
