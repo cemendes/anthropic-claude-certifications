@@ -14,10 +14,13 @@ import './styles/global.css';
 
 function App() {
   const { 
-    state, stats, startQuiz, selectAnswer, toggleFlag, clearAllFlags,
+    state, stats, setTrack, startQuiz, selectAnswer, toggleFlag, clearAllFlags,
     nextQuestion, prevQuestion, jumpToQuestion, 
     submitQuiz, resetQuiz 
   } = useQuiz();
+
+  const isCCDV = state.track === 'ccdv-f';
+  const trackTitle = isCCDV ? 'CCDV-F Practice Quiz' : 'CCAR-F Practice Quiz';
 
   if (state.mode === null) {
     return (
@@ -25,14 +28,19 @@ function App() {
         <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-outline-variant px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary-container">terminal</span>
-            <h1 className="font-semibold text-lg">CCAR-F Practice Quiz</h1>
+            <h1 className="font-semibold text-lg">{trackTitle}</h1>
           </div>
           <div className="w-8 h-8 rounded-full bg-card-2 border border-outline-variant flex items-center justify-center">
             <span className="material-symbols-outlined text-sm text-on-surface-variant">person</span>
           </div>
         </header>
         <main className="max-w-[800px] mx-auto p-4 md:p-6 lg:p-8">
-          <ModeSelect onSelectMode={startQuiz} stats={stats} />
+          <ModeSelect 
+            track={state.track}
+            onSelectTrack={setTrack}
+            onSelectMode={startQuiz} 
+            stats={stats} 
+          />
         </main>
       </div>
     );
@@ -44,7 +52,7 @@ function App() {
         <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-outline-variant px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary-container">terminal</span>
-            <h1 className="font-semibold text-lg">CCAR-F Practice Quiz</h1>
+            <h1 className="font-semibold text-lg">{trackTitle}</h1>
           </div>
         </header>
         <main className="max-w-[800px] mx-auto p-4 md:p-6 lg:p-8">
@@ -65,7 +73,7 @@ function App() {
         <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-outline-variant px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary-container">terminal</span>
-            <h1 className="font-semibold text-lg">CCAR-F Practice Quiz</h1>
+            <h1 className="font-semibold text-lg">{trackTitle}</h1>
           </div>
         </header>
         <main className="max-w-[800px] mx-auto p-4 md:p-6 lg:p-8">
@@ -85,7 +93,7 @@ function App() {
       <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-outline-variant px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-primary-container">terminal</span>
-          <h1 className="font-semibold text-lg hidden sm:block">CCAR-F Practice Quiz</h1>
+          <h1 className="font-semibold text-lg hidden sm:block">{trackTitle}</h1>
         </div>
         <div className="flex items-center gap-4">
           {state.mode === 'exam' && <ExamTimer totalSeconds={7200} onTimeUp={submitQuiz} />}
@@ -101,7 +109,7 @@ function App() {
       <main className="max-w-[800px] mx-auto p-4 md:p-6 lg:p-8">
         <div className="mb-6 flex justify-between items-center">
           <h2 className="text-xl font-semibold">
-            {state.mode === 'exam' ? 'Exam Simulation' : 'Study Mode'}
+            {state.mode === 'exam' ? 'Exam Simulation' : 'Study Mode'} ({isCCDV ? 'Developer CCDV-F' : 'Architect CCAR-F'})
           </h2>
         </div>
 
@@ -140,6 +148,7 @@ function App() {
           <div className="w-full md:w-64 shrink-0">
             {state.mode === 'study' ? (
               <DomainFilter 
+                track={state.track}
                 selectedDomains={state.selectedDomains} 
                 onChange={(domains) => {
                   resetQuiz();

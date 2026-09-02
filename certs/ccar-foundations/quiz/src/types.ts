@@ -23,9 +23,12 @@ export interface Question {
   references: QuestionReference[];
 }
 
+export type TrackType = 'ccar-f' | 'ccdv-f';
+
 export type QuizMode = 'study' | 'exam' | 'review' | null;
 
 export interface QuizState {
+  track: TrackType;
   mode: QuizMode;
   currentIndex: number;
   answers: Record<number, string>; // questionId -> selected label

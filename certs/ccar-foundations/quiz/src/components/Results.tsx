@@ -1,4 +1,6 @@
+import React from 'react';
 import type { QuizState } from '../types';
+import { getTrackDomainNames } from '../hooks/useQuiz';
 
 interface Props {
   state: QuizState;
@@ -6,15 +8,7 @@ interface Props {
   onReview: () => void;
 }
 
-const domainNames: Record<number, string> = {
-  1: 'Agentic Capabilities',
-  2: 'Claude Code',
-  3: 'Prompt Engineering',
-  4: 'Model Control Protocol',
-  5: 'Context Management',
-};
-
-const domainColors: Record<number, string> = {
+const DOMAIN_COLORS: Record<number, string> = {
   1: 'bg-domain-1',
   2: 'bg-domain-2',
   3: 'bg-domain-3',
@@ -23,6 +17,7 @@ const domainColors: Record<number, string> = {
 };
 
 export const Results: React.FC<Props> = ({ state, onReset, onReview }) => {
+  const domainNames = getTrackDomainNames(state.track);
   let score = 0;
   const domainScores: Record<number, { correct: number, total: number }> = {
     1: { correct: 0, total: 0 },
@@ -33,15 +28,18 @@ export const Results: React.FC<Props> = ({ state, onReset, onReview }) => {
   };
 
   state.questions.forEach(q => {
-    domainScores[q.domain].total += 1;
-    if (state.answers[q.id] === q.correctAnswer) {
-      score += 1;
-      domainScores[q.domain].correct += 1;
+    if (domainScores[q.domain]) {
+      domainScores[q.domain].total += 1;
+      if (state.answers[q.id] === q.correctAnswer) {
+        score += 1;
+        domainScores[q.domain].correct += 1;
+      }
     }
   });
 
-  const scaledScore = Math.round((score / state.questions.length) * 1000);
-  const passed = scaledScore >= 700;
+  const totalQuestions = state.questions.length || 1;
+  const scaledScore = Math.round((score / totalQuestions) * 1000);
+  const passed = scaledScore >= 720;
   const maxScore = state.questions.length;
 
   const weakestDomain = Object.entries(domainScores).reduce((acc, [domain, data]) => {
@@ -71,7 +69,7 @@ export const Results: React.FC<Props> = ({ state, onReset, onReview }) => {
             {passed ? 'PASSED' : 'FAILED'}
           </div>
           <div className="text-sm text-on-surface-variant text-center px-4">
-            Passing score is 700 (70%).
+            Passing score is 720 / 1000 (72%).
           </div>
         </div>
       </div>
@@ -86,7 +84,7 @@ export const Results: React.FC<Props> = ({ state, onReset, onReview }) => {
         <div className="flex flex-col gap-6">
           {[1, 2, 3, 4, 5].map(domain => {
             const data = domainScores[domain];
-            if (data.total === 0) return null;
+            if (!data || data.total === 0) return null;
             const percentage = Math.round((data.correct / data.total) * 100);
             
             return (
@@ -97,7 +95,7 @@ export const Results: React.FC<Props> = ({ state, onReset, onReview }) => {
                 </div>
                 <div className="h-1.5 w-full bg-card-2 rounded-full overflow-hidden">
                   <div 
-                    className={`h-full rounded-full ${domainColors[domain]}`} 
+                    className={`h-full rounded-full ${DOMAIN_COLORS[domain]}`} 
                     style={{ width: `${percentage}%` }}
                   ></div>
                 </div>

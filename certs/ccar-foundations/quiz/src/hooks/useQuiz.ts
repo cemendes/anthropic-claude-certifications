@@ -1,11 +1,13 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import type { QuizMode, QuizState } from '../types';
-import { questions as allQuestions } from '../data/questions';
+import type { QuizMode, QuizState, TrackType, Question } from '../types';
+import { questions as ccarQuestions, DOMAIN_NAMES as CCAR_DOMAINS } from '../data/questions';
+import { ccdvQuestions, CCDV_DOMAIN_NAMES } from '../data/questions-ccdv';
 
-const STORAGE_KEY_SESSION = 'ccar_quiz_active_session_v1';
-const STORAGE_KEY_STATS = 'ccar_quiz_global_stats_v1';
+const STORAGE_KEY_SESSION = 'anthropic_quiz_active_session_v2';
+const STORAGE_KEY_STATS = 'anthropic_quiz_global_stats_v2';
 
 interface StoredSession {
+  track: TrackType;
   mode: QuizMode;
   currentIndex: number;
   answers: Record<number, string>;
@@ -21,20 +23,30 @@ interface GlobalStats {
   lastSession: number | null;
 }
 
+function getTrackQuestions(track: TrackType): Question[] {
+  return track === 'ccdv-f' ? ccdvQuestions : ccarQuestions;
+}
+
+export function getTrackDomainNames(track: TrackType): Record<number, string> {
+  return track === 'ccdv-f' ? CCDV_DOMAIN_NAMES : CCAR_DOMAINS;
+}
+
 function loadInitialState(): QuizState {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY_SESSION);
     if (raw) {
       const parsed: StoredSession = JSON.parse(raw);
       if (parsed && parsed.mode) {
-        // Hydrate full question objects from IDs
+        const track = parsed.track || 'ccar-f';
+        const allQuestions = getTrackQuestions(track);
         const questionMap = new Map(allQuestions.map(q => [q.id, q]));
         const hydratedQuestions = (parsed.questions || [])
           .map(id => questionMap.get(id))
-          .filter(Boolean) as typeof allQuestions;
+          .filter(Boolean) as Question[];
 
         if (hydratedQuestions.length > 0) {
           return {
+            track,
             mode: parsed.mode,
             currentIndex: Math.min(parsed.currentIndex || 0, hydratedQuestions.length - 1),
             answers: parsed.answers || {},
@@ -52,6 +64,7 @@ function loadInitialState(): QuizState {
   }
 
   return {
+    track: 'ccar-f',
     mode: null,
     currentIndex: 0,
     answers: {},
@@ -86,6 +99,7 @@ export function useQuiz() {
         window.localStorage.removeItem(STORAGE_KEY_SESSION);
       } else {
         const sessionData: StoredSession = {
+          track: state.track,
           mode: state.mode,
           currentIndex: state.currentIndex,
           answers: state.answers,
@@ -102,43 +116,60 @@ export function useQuiz() {
     }
   }, [state]);
 
-  // Compute aggregate stats for landing screen
+  const setTrack = useCallback((track: TrackType) => {
+    setState(prev => ({
+      ...prev,
+      track,
+      mode: null,
+      currentIndex: 0,
+      answers: {},
+      showExplanation: false,
+      submitted: false,
+      questions: [],
+    }));
+  }, []);
+
   const stats = useMemo(() => {
-    const records = Object.values(globalStats.answeredMap);
-    const totalAnswered = records.length;
-    const correctCount = records.filter(r => r.correct).length;
+    const allQuestions = getTrackQuestions(state.track);
+    const questionIds = new Set(allQuestions.map(q => q.id));
+    const relevantAnswers = Object.entries(globalStats.answeredMap)
+      .filter(([id]) => questionIds.has(Number(id)))
+      .map(([, rec]) => rec);
+      
+    const totalAnswered = relevantAnswers.length;
+    const correctCount = relevantAnswers.filter(r => r.correct).length;
     const accuracy = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
     return {
       totalAnswered,
       accuracy,
       lastSession: globalStats.lastSession ? new Date(globalStats.lastSession) : null,
     };
-  }, [globalStats]);
+  }, [globalStats, state.track]);
 
   const startQuiz = useCallback((mode: QuizMode, domains: number[] = [1, 2, 3, 4, 5]) => {
+    const allQuestions = getTrackQuestions(state.track);
     let selectedQuestions = [...allQuestions];
     
     if (mode === 'study') {
       selectedQuestions = selectedQuestions.filter(q => domains.includes(q.domain));
     } else if (mode === 'exam') {
-      // 60 random questions for exam simulation
       selectedQuestions = selectedQuestions.sort(() => 0.5 - Math.random()).slice(0, 60);
     } else if (mode === 'review') {
-      // In review mode, load all questions so ReviewPanel can filter flagged
       selectedQuestions = [...allQuestions];
     }
     
-    setState({
+    setState(prev => ({
+      ...prev,
       mode,
       currentIndex: 0,
       answers: {},
-      flagged: state.flagged, // retain existing flagged questions
+      flagged: prev.flagged,
       showExplanation: false,
       submitted: false,
       selectedDomains: domains,
       questions: selectedQuestions,
-    });
-  }, [state.flagged]);
+    }));
+  }, [state.track]);
 
   const selectAnswer = useCallback((answer: string) => {
     setState(prev => {
@@ -148,7 +179,6 @@ export function useQuiz() {
       const newAnswers = { ...prev.answers, [currentQ.id]: answer };
       const isCorrect = currentQ.correctAnswer === answer;
 
-      // Update global lifetime stats
       setGlobalStats(curr => {
         const updated = {
           ...curr,
@@ -196,7 +226,6 @@ export function useQuiz() {
   const nextQuestion = useCallback(() => {
     setState(prev => {
       const currentQ = prev.questions[prev.currentIndex];
-      // In study mode: First click on Check Answer reveals explanation; second click moves to next
       if (prev.mode === 'study' && !prev.showExplanation && currentQ && prev.answers[currentQ.id]) {
         return { ...prev, showExplanation: true };
       }
@@ -242,21 +271,23 @@ export function useQuiz() {
 
   const resetQuiz = useCallback(() => {
     window.localStorage.removeItem(STORAGE_KEY_SESSION);
-    setState({
+    setState(prev => ({
+      ...prev,
       mode: null,
       currentIndex: 0,
       answers: {},
-      flagged: state.flagged,
+      flagged: prev.flagged,
       showExplanation: false,
       submitted: false,
       selectedDomains: [1, 2, 3, 4, 5],
       questions: [],
-    });
-  }, [state.flagged]);
+    }));
+  }, []);
 
   return {
     state,
     stats,
+    setTrack,
     startQuiz,
     selectAnswer,
     toggleFlag,
