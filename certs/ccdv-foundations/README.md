@@ -22,7 +22,27 @@ The official study track, blueprint analysis, code-first architecture, and prepa
 * **Time Limit**: 120 Minutes (~2 minutes per question).
 * **Scoring Scale**: Scaled score from **100 to 1000**.
 * **Passing Score**: **720 / 1000** (equivalent to ~43/60 questions correct).
+* **Result**: 🟢 **Passed — Score: 955 / 1000** (September 2, 2026).
 * **Delivery**: Online proctored or authorized test center.
+
+---
+
+## 📈 Official Score Breakdown (955 / 1000)
+
+| Test Objective | Score | Test Objective | Score |
+|---|:---:|---|:---:|
+| **Agent Architecture** | 100% | **Model Selection** | 100% |
+| **Agent Construction** | 0% | **Cost/Token Management** | 100% |
+| **Agent Patterns** | 100% | **Context Engineering** | 100% |
+| **Systems Life Cycle** | 100% | **Prompt Engineering** | 100% |
+| **Claude API Mechanics** | 100% | **Output Handling** | 100% |
+| **SW Eng Foundations** | 100% | **AI App Security** | 100% |
+| **Claude App Design** | 100% | **Hooks** | 100% |
+| **Config Management** | 100% | **Identity/Secrets** | 100% |
+| **Claude Code Operation** | 100% | **Tool Implementation** | 100% |
+| **Debugging** | 100% | **MCP Dev** | 100% |
+| **LLM Fundamentals** | 75% | **Agentic Customization** | 100% |
+| **Tech Fundamentals** | 100% | | |
 
 ---
 
