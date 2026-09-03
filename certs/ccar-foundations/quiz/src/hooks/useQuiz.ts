@@ -2,9 +2,10 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import type { QuizMode, QuizState, TrackType, Question } from '../types';
 import { questions as ccarQuestions, DOMAIN_NAMES as CCAR_DOMAINS } from '../data/questions';
 import { ccdvQuestions, CCDV_DOMAIN_NAMES } from '../data/questions-ccdv';
+import { ccarpQuestions, CCARP_DOMAIN_NAMES } from '../data/questions-ccarp';
 
-const STORAGE_KEY_SESSION = 'anthropic_quiz_active_session_v2';
-const STORAGE_KEY_STATS = 'anthropic_quiz_global_stats_v2';
+const STORAGE_KEY_SESSION = 'anthropic_quiz_active_session_v3';
+const STORAGE_KEY_STATS = 'anthropic_quiz_global_stats_v3';
 
 interface StoredSession {
   track: TrackType;
@@ -24,11 +25,15 @@ interface GlobalStats {
 }
 
 function getTrackQuestions(track: TrackType): Question[] {
-  return track === 'ccdv-f' ? ccdvQuestions : ccarQuestions;
+  if (track === 'ccdv-f') return ccdvQuestions;
+  if (track === 'ccar-p') return ccarpQuestions;
+  return ccarQuestions;
 }
 
 export function getTrackDomainNames(track: TrackType): Record<number, string> {
-  return track === 'ccdv-f' ? CCDV_DOMAIN_NAMES : CCAR_DOMAINS;
+  if (track === 'ccdv-f') return CCDV_DOMAIN_NAMES;
+  if (track === 'ccar-p') return CCARP_DOMAIN_NAMES;
+  return CCAR_DOMAINS;
 }
 
 function loadInitialState(): QuizState {
@@ -37,7 +42,7 @@ function loadInitialState(): QuizState {
     if (raw) {
       const parsed: StoredSession = JSON.parse(raw);
       if (parsed && parsed.mode) {
-        const track = parsed.track || 'ccar-f';
+        const track = parsed.track || 'ccar-p';
         const allQuestions = getTrackQuestions(track);
         const questionMap = new Map(allQuestions.map(q => [q.id, q]));
         const hydratedQuestions = (parsed.questions || [])
@@ -64,7 +69,7 @@ function loadInitialState(): QuizState {
   }
 
   return {
-    track: 'ccar-f',
+    track: 'ccar-p',
     mode: null,
     currentIndex: 0,
     answers: {},

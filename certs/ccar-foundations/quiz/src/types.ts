@@ -23,7 +23,7 @@ export interface Question {
   references: QuestionReference[];
 }
 
-export type TrackType = 'ccar-f' | 'ccdv-f';
+export type TrackType = 'ccar-f' | 'ccdv-f' | 'ccar-p';
 
 export type QuizMode = 'study' | 'exam' | 'review' | null;
 

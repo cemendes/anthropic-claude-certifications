@@ -14,29 +14,48 @@ interface Props {
 }
 
 export const ModeSelect: React.FC<Props> = ({ track, onSelectTrack, onSelectMode, stats }) => {
-  const isCCDV = track === 'ccdv-f';
+  const getTrackTitle = () => {
+    if (track === 'ccdv-f') return 'Certified Developer: Foundations (CCDV-F)';
+    if (track === 'ccar-p') return 'Certified Architect: Professional (CCAR-P)';
+    return 'Certified Architect: Foundations (CCAR-F)';
+  };
+
+  const getTrackSubtitle = () => {
+    if (track === 'ccdv-f') return 'Master Messages API, Tool Calling & Prompt Caching';
+    if (track === 'ccar-p') return 'Master Enterprise Multi-Agent Swarms, Remote MCP & Multi-Cloud';
+    return 'Master Multi-Agent loops, MCP & Workflow Patterns';
+  };
 
   return (
-    <div className="flex flex-col gap-8 w-full max-w-[800px] mx-auto">
+    <div className="flex flex-col gap-8 w-full max-w-[850px] mx-auto">
       {/* Track Selector Tabs */}
-      <div className="flex bg-card-1 p-1.5 rounded-xl border border-border shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-3 bg-card-1 p-1.5 rounded-xl border border-border shadow-sm gap-1">
         <button
           onClick={() => onSelectTrack('ccar-f')}
-          className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
-            !isCCDV ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
+          className={`py-2.5 px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 ${
+            track === 'ccar-f' ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
           }`}
         >
           <span className="material-symbols-outlined text-base">architecture</span>
-          Certified Architect (CCAR-F)
+          Architect Found.
         </button>
         <button
           onClick={() => onSelectTrack('ccdv-f')}
-          className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
-            isCCDV ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
+          className={`py-2.5 px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 ${
+            track === 'ccdv-f' ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
           }`}
         >
           <span className="material-symbols-outlined text-base">terminal</span>
-          Certified Developer (CCDV-F)
+          Developer Found.
+        </button>
+        <button
+          onClick={() => onSelectTrack('ccar-p')}
+          className={`py-2.5 px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 ${
+            track === 'ccar-p' ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">workspace_premium</span>
+          Architect Pro
         </button>
       </div>
 
@@ -45,10 +64,10 @@ export const ModeSelect: React.FC<Props> = ({ track, onSelectTrack, onSelectMode
         <div className="absolute inset-0 bg-primary/5 blur-3xl pointer-events-none"></div>
         <div className="relative z-10 flex flex-col gap-1">
           <h2 className="text-2xl font-bold text-on-surface">
-            {isCCDV ? 'Certified Developer: Foundations' : 'Certified Architect: Foundations'}
+            {getTrackTitle()}
           </h2>
           <p className="text-on-surface-variant">
-            {isCCDV ? 'Master Messages API, Tool Calling & Prompt Caching' : 'Master Multi-Agent loops, MCP & Workflow Patterns'}
+            {getTrackSubtitle()}
           </p>
         </div>
         <div className="relative z-10 mt-6 sm:mt-0 flex items-center gap-4">
