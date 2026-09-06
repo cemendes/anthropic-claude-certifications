@@ -16,37 +16,58 @@ The official advanced enterprise study track, blueprint analysis, and production
 
 ---
 
-## 🎯 Exam Structure & Scoring Model
+## 🎯 Exam Structure & Official Score
 
-* **Format**: 60 Scenario-based Multiple-Choice Questions (Single & Multi-Select).
+* **Format**: 60 Scenario-based Questions (Multiple-Choice and **Tri-Category Classification/Sorting**).
 * **Time Limit**: 120 Minutes (~2 minutes per question).
 * **Scoring Scale**: Scaled score from **100 to 1000**.
 * **Passing Score**: **720 / 1000** (equivalent to ~43/60 questions correct).
-* **Delivery**: Online proctored or authorized test center.
+* **Official Result**: 🟢 **PASSED — Score: 836 / 1000** (September 6, 2026).
+* **Delivery**: Online proctored.
 
 ---
 
-## 🧠 High-Yield Professional Architectural Heuristics
+## 📈 Official Score Breakdown (836 / 1000)
 
-1. **Enterprise Multi-Agent Consensus & Circuit Breakers**:
-   * Never let multi-agent swarms communicate without hard cycle detectors and monotonic counter circuit breakers in the orchestration layer.
-   * Multi-agent state handoffs must be sanitized: pass structured artifact summaries, never unbounded raw scratchpad chat histories.
+### 🌟 100% Mastery Objectives (22 Areas):
+* Translate business problems into Claude-based AI solutions (100%)
+* Design end-to-end architectures (input → processing → output → feedback loops) (100%)
+* Select appropriate architectural patterns (workflow, agentic, augmented LLM) (100%)
+* Apply decomposition techniques for complex problem solving (100%)
+* Align solutions to business value pillars (efficiency, transformation, productivity, cost, SLAs) (100%)
+* Select appropriate Claude models based on trade-offs (100%)
+* Implement prompt reuse strategies (e.g., caching, modular prompts) (100%)
+* Analyze authentication and authorization requirements to identify security gaps (100%)
+* Analyze observability challenges and select monitoring strategies at scale (100%)
+* Apply retrieval strategies matched to data shape and query pattern (100%)
+* Define evaluation metrics (accuracy, latency, cost, safety, security) (100%)
+* Design evaluation datasets and test frameworks using a mix of testing methodologies (100%)
+* Conduct A/B testing and iterative improvements (100%)
+* Diagnose system issues (prompt failure, hallucinations, model mismatch) (100%)
+* Optimize token usage, latency, and cost-performance trade-offs (100%)
+* Monitor system performance using logging and observability tools (100%)
+* Address ethical AI considerations (bias, fairness, transparency) (100%)
+* Communicate architectural decisions and trade-offs (100%)
+* Document architectures and provide implementation guidance (100%)
+* Support lifecycle phases (discovery, design, handoff, monitoring, iteration) (100%)
+* Configure Claude tools and environments for teams (e.g., Claude Code) (100%)
+* Improve developer workflows using AI-assisted tooling (100%)
 
-2. **Distributed MCP over SSE vs stdio**:
-   * Local `stdio` MCP is strictly for single-user desktop runtimes (e.g. Claude Code, Claude Desktop).
-   * Enterprise production requires **MCP over SSE** secured with mTLS or OAuth 2.0 Bearer tokens, fronted by an API Gateway for TLS termination and rate limiting.
+---
 
-3. **Multi-Cloud Portability & Fallback Matrix**:
-   * Direct API vs Vertex AI vs Bedrock differ in parameter names, streaming chunks, and prompt caching availability.
-   * Design provider-agnostic abstractions at the orchestration boundary to fail over instantly when encountering regional 529/429 spikes.
+## 💡 Candidate Exam Dynamics & Pacing Insights
 
-4. **Zero Data Retention (ZDR) & Enterprise Boundaries**:
-   * Understand that commercial Anthropic API and cloud provider endpoints (Vertex/Bedrock) do not train on customer inputs by default.
-   * Regulatory compliance often requires customer-managed encryption keys (CMEK) and VPC Private Service Connect (PSC) / PrivateLink.
-
-5. **Production Evals & LLM-as-a-Judge Calibration**:
-   * Evals must use deterministic temperature (`0.0`), few-shot rubric anchoring, and mandatory Chain-of-Thought reasoning steps before scoring.
-   * Continuous canary deployments compare live distributions against golden evaluation sets using OpenTelemetry spans.
+1. **Nuance Density & Tricky Distractors**:
+   * Highest nuance of all 4 exams. Questions are less verbose than Foundations, but choices feature razor-thin distinctions where multiple options look ~90% plausible.
+2. **New Question Modality — Tri-Category Classification**:
+   * Features classification questions where items must be sorted into three architectural categories (e.g., Workflow vs. Autonomous Agent vs. Augmented LLM).
+3. **Pacing Recommendation**:
+   * Answering all questions left only 16 minutes on the clock, which proved insufficient to review all flagged questions.
+   * **Rule of Thumb**: Commit decisively on the first pass; flag only $\le 5$ items with high uncertainty.
+4. **Preparation Resources**:
+   * Google Internal GenAI Architect Enablement.
+   * Anthropic Official Architecture Documentation.
+   * [Udemy CCAR-P Exam Prep Course](https://www.udemy.com/course/ccar-p-exam-prep/).
 
 ---
 
@@ -55,4 +76,4 @@ The official advanced enterprise study track, blueprint analysis, and production
 * 📖 **[Domain Study Guides](./study-guide/)**: In-depth architectural deep dives for all 5 enterprise domains.
 * ⚡ **[Cheat Sheets](./cheat-sheets/)**: Quick reference tables for multi-cloud parity, MCP security, and agent governance.
 * 📽️ **[Slide Deck](./presentation/slides.md)**: Professional review presentation for team leads and architects.
-* 🕹️ **[Interactive Quiz Simulator](../../certs/ccar-foundations/quiz/)**: Exam simulation mode with professional scenario questions.
+* 🕹️ **[Interactive Quiz Simulator](../../certs/ccar-foundations/quiz/)**: Multi-track practice engine deployed on GitHub Pages.

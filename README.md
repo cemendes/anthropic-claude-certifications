@@ -1,37 +1,37 @@
 # 🏆 Anthropic Claude Certifications Hub
 
 [![Deploy to GitHub Pages](https://github.com/cemendes/anthropic-claude-certifications/actions/workflows/deploy.yml/badge.svg)](https://github.com/cemendes/anthropic-claude-certifications/actions/workflows/deploy.yml)
-[![Live Practice Quiz](https://img.shields.io/badge/Live%20App-CCAR--F%20Quiz-blue?style=flat&logo=googlechrome)](https://cemendes.github.io/anthropic-claude-certifications/)
+[![Live Practice Quiz](https://img.shields.io/badge/Live%20App-Claude%20Cert%20Simulator-blue?style=flat&logo=googlechrome)](https://cemendes.github.io/anthropic-claude-certifications/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An open-source, comprehensive study and mastery hub for **Anthropic Claude Certifications**, engineered for Solutions Architects, AI Engineers, and Google Customer Engineers.
+An open-source, comprehensive study and mastery hub for all 4 official **Anthropic Claude Certifications**, engineered for Solutions Architects, AI Engineers, and Google Customer Engineers.
 
 ---
 
-## 🧭 Certification Master Roadmap
+## 🧭 Certification Master Roadmap (🎉 4 of 4 Completed)
 
-| Certification Track | Level | Exam Code | Status | Comprehensive Resources |
-|---|---|---|---|---|
-| **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟢 **Passed (967/1000)** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
-| **Claude Certified Architect: Foundations** | Associate / Foundation | **CCAR-F** | 🟢 **Passed (854/1000)** | [Study Guides](./certs/ccar-foundations/study-guide/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live Quiz App](https://cemendes.github.io/anthropic-claude-certifications/) |
-| **Claude Certified Developer: Foundations** | Associate / Developer | **CCDV-F** | 🟢 **Passed (955/1000)** | [Study Guides](./certs/ccdv-foundations/study-guide/), [Cheat Sheets](./certs/ccdv-foundations/cheat-sheets/), [Slides](./certs/ccdv-foundations/presentation/slides.md), [Track README](./certs/ccdv-foundations/) |
-| **Claude Certified Architect: Professional** | Professional | **CCAR-P** | 🟡 **Active Prep / Ready** | [Study Guides](./certs/ccar-professional/study-guide/), [Cheat Sheets](./certs/ccar-professional/cheat-sheets/), [Slides](./certs/ccar-professional/presentation/slides.md), [Track README](./certs/ccar-professional/) |
+| Certification Track | Level | Exam Code | Result / Status | Official Score | Comprehensive Resources |
+|---|---|:---:|:---:|:---:|---|
+| **Claude Certified Associate: Foundations** | Associate | **CCAO-F** | 🟢 **PASSED** | **967 / 1000** | [Study Guide](./certs/ccao-foundations/study-guide/associate-guide.md), [Cheat Sheet](./certs/ccao-foundations/cheat-sheets/associate-cheatsheet.md), [Track README](./certs/ccao-foundations/) |
+| **Claude Certified Architect: Foundations** | Foundation / Architect | **CCAR-F** | 🟢 **PASSED** | **854 / 1000** | [Study Guides](./certs/ccar-foundations/study-guide/), [Cheat Sheets](./certs/ccar-foundations/cheat-sheets/), [Slides](./certs/ccar-foundations/presentation/slides.md), [Live App](https://cemendes.github.io/anthropic-claude-certifications/) |
+| **Claude Certified Developer: Foundations** | Developer | **CCDV-F** | 🟢 **PASSED** | **955 / 1000** | [Study Guide](./certs/ccdv-foundations/study-guide/), [Cheat Sheets](./certs/ccdv-foundations/cheat-sheets/), [64 Practice Qs](https://cemendes.github.io/anthropic-claude-certifications/) |
+| **Claude Certified Architect: Professional** | Professional / Enterprise | **CCAR-P** | 🟢 **PASSED** | **836 / 1000** | [Enterprise Guide](./certs/ccar-professional/study-guide/), [Cheat Sheets](./certs/ccar-professional/cheat-sheets/), [Slides](./certs/ccar-professional/presentation/slides.md) |
 
 ---
 
 ## 📚 Certification Tracks Breakdown
 
-### 1. 🟢 [CCAO-F: Associate Foundations](./certs/ccao-foundations/)
-* Core mastery of Claude Web & Desktop, Artifacts lifecycle ($\ge 15$ lines, visual components, documents), Projects knowledge bases, Custom Instructions, Team workspaces, and Multimodal Vision. (Score: **967 / 1000**).
+### 1. 🟢 [CCAO-F: Associate Foundations (Score: 967/1000)](./certs/ccao-foundations/)
+* Core mastery of Claude Web & Desktop, Artifacts lifecycle ($\ge 15$ lines, visual components, documents), Projects knowledge bases, Custom Instructions, Team workspaces, and Multimodal Vision.
 
-### 2. 🟢 [CCAR-F: Architect Foundations](./certs/ccar-foundations/)
-* Production architecture, Agentic Loops (`stop_reason: tool_use`), 5 Workflow Patterns, `CLAUDE.md` hierarchy, Model Context Protocol (MCP), Prompt Caching exact prefix rules, and Context Reliability. Includes the **100-Question Interactive Practice App**. (Score: **854 / 1000**).
+### 2. 🟢 [CCAR-F: Architect Foundations (Score: 854/1000)](./certs/ccar-foundations/)
+* Production architecture, Agentic Loops (`stop_reason: tool_use`), 5 Workflow Patterns, `CLAUDE.md` hierarchy, Model Context Protocol (MCP), Prompt Caching exact prefix rules, and Context Reliability. Includes the **100-Question Interactive Practice App**.
 
-### 3. 🟢 [CCDV-F: Developer Foundations](./certs/ccdv-foundations/)
-* Messages API architecture, Tool Calling (`tool_choice`), JSON Schemas, Pydantic, assistant prefilling for pure JSON, Prompt Caching token thresholds, Streaming SSE, and resilient error handling (429/529 retries with jitter). (Score: **955 / 1000**).
+### 3. 🟢 [CCDV-F: Developer Foundations (Score: 955/1000)](./certs/ccdv-foundations/)
+* Messages API, Tool Calling (`tool_choice`), JSON Schemas, Pydantic, SDK integrations, Prompt Caching, and Streaming SSE.
 
-### 4. 🟡 [CCAR-P: Architect Professional](./certs/ccar-professional/)
-* Enterprise Multi-Agent Swarms & Consensus, Distributed Production MCP over SSE with OAuth 2.0 / mTLS, Multi-Cloud Failover (Anthropic Direct / Google Cloud Vertex AI / AWS Bedrock), Zero Data Retention (ZDR), and Evals-as-Code.
+### 4. 🟢 [CCAR-P: Architect Professional (Score: 836/1000)](./certs/ccar-professional/)
+* Enterprise Multi-Agent Swarms, Production MCP over SSE with OAuth 2.0, Multi-Cloud Failover (Vertex AI / Bedrock / Direct API), Zero Data Retention (ZDR), and Evals-as-Code.
 
 ---
 
@@ -53,7 +53,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🌐 Embedding the Quiz in Your Website / Blog
+## 🌐 Embedding the Simulator in Your Website / Blog
 
 ```html
 <iframe 
