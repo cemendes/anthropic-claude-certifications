@@ -22,12 +22,14 @@ function App() {
   const getHeaderTitle = () => {
     if (state.track === 'ccdv-f') return 'CCDV-F Practice Quiz';
     if (state.track === 'ccar-p') return 'CCAR-P Practice Quiz';
+    if (state.track === 'ccao-f') return 'CCAO-F Practice Quiz';
     return 'CCAR-F Practice Quiz';
   };
 
   const getModeLabel = () => {
     if (state.track === 'ccdv-f') return 'Developer CCDV-F';
     if (state.track === 'ccar-p') return 'Architect Professional CCAR-P';
+    if (state.track === 'ccao-f') return 'Associate CCAO-F';
     return 'Architect CCAR-F';
   };
 
@@ -105,7 +107,7 @@ function App() {
           <h1 className="font-semibold text-lg hidden sm:block">{getHeaderTitle()}</h1>
         </div>
         <div className="flex items-center gap-4">
-          {state.mode === 'exam' && <ExamTimer totalSeconds={7200} onTimeUp={submitQuiz} />}
+          {state.mode === 'exam' && <ExamTimer totalSeconds={state.track === 'ccao-f' ? 5400 : 7200} onTimeUp={submitQuiz} />}
           <button 
             className="px-3 py-1.5 rounded-lg border border-outline-variant text-sm font-medium hover:bg-card-2 transition-colors" 
             onClick={resetQuiz}

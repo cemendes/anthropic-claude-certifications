@@ -17,19 +17,21 @@ export const ModeSelect: React.FC<Props> = ({ track, onSelectTrack, onSelectMode
   const getTrackTitle = () => {
     if (track === 'ccdv-f') return 'Certified Developer: Foundations (CCDV-F)';
     if (track === 'ccar-p') return 'Certified Architect: Professional (CCAR-P)';
+    if (track === 'ccao-f') return 'Certified Associate: Foundations (CCAO-F)';
     return 'Certified Architect: Foundations (CCAR-F)';
   };
 
   const getTrackSubtitle = () => {
     if (track === 'ccdv-f') return 'Master Messages API, Tool Calling & Prompt Caching';
     if (track === 'ccar-p') return 'Master Enterprise Multi-Agent Swarms, Remote MCP & Multi-Cloud';
+    if (track === 'ccao-f') return 'Master Claude Web, Projects, Artifacts & Multimodal Vision';
     return 'Master Multi-Agent loops, MCP & Workflow Patterns';
   };
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-[850px] mx-auto">
       {/* Track Selector Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 bg-card-1 p-1.5 rounded-xl border border-border shadow-sm gap-1">
+      <div className="grid grid-cols-2 sm:grid-cols-4 bg-card-1 p-1.5 rounded-xl border border-border shadow-sm gap-1">
         <button
           onClick={() => onSelectTrack('ccar-f')}
           className={`py-2.5 px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 ${
@@ -56,6 +58,15 @@ export const ModeSelect: React.FC<Props> = ({ track, onSelectTrack, onSelectMode
         >
           <span className="material-symbols-outlined text-base">workspace_premium</span>
           Architect Pro
+        </button>
+        <button
+          onClick={() => onSelectTrack('ccao-f')}
+          className={`py-2.5 px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 ${
+            track === 'ccao-f' ? 'bg-primary-container text-on-surface shadow-md' : 'text-on-surface-variant hover:text-on-surface'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">school</span>
+          Associate Found.
         </button>
       </div>
 
@@ -118,7 +129,7 @@ export const ModeSelect: React.FC<Props> = ({ track, onSelectTrack, onSelectMode
           </div>
           <h3 className="text-xl font-bold text-on-surface">Exam Simulation</h3>
           <p className="text-on-surface-variant text-sm flex-1">
-            60 questions. 120 minutes. No immediate feedback. Real proctored exam conditions.
+            {track === 'ccao-f' ? '40 questions. 90 minutes. No immediate feedback. Real proctored exam conditions.' : '60 questions. 120 minutes. No immediate feedback. Real proctored exam conditions.'}
           </p>
         </button>
 

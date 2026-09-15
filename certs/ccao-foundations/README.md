@@ -31,3 +31,4 @@ The **CCAO-F** validates foundational, day-to-day operational mastery of the Cla
 
 * 📖 **[Comprehensive Associate Study Guide](./study-guide/associate-guide.md)**: Deep dive into Artifacts, Projects, Team Workspaces, and Prompting.
 * ⚡ **[Associate Fast-Lookup Cheat Sheet](./cheat-sheets/associate-cheatsheet.md)**: Quick comparison tables, limits, and high-yield rules.
+* 🕹️ **[Interactive Quiz Simulator](../../certs/ccar-foundations/quiz/)**: Multi-track practice engine deployed on [GitHub Pages](https://cemendes.github.io/anthropic-claude-certifications/).

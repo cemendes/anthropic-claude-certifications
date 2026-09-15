@@ -3,6 +3,7 @@ import type { QuizMode, QuizState, TrackType, Question } from '../types';
 import { questions as ccarQuestions, DOMAIN_NAMES as CCAR_DOMAINS } from '../data/questions';
 import { ccdvQuestions, CCDV_DOMAIN_NAMES } from '../data/questions-ccdv';
 import { ccarpQuestions, CCARP_DOMAIN_NAMES } from '../data/questions-ccarp';
+import { ccaoQuestions, CCAO_DOMAIN_NAMES } from '../data/questions-ccao';
 
 const STORAGE_KEY_SESSION = 'anthropic_quiz_active_session_v3';
 const STORAGE_KEY_STATS = 'anthropic_quiz_global_stats_v3';
@@ -27,12 +28,14 @@ interface GlobalStats {
 function getTrackQuestions(track: TrackType): Question[] {
   if (track === 'ccdv-f') return ccdvQuestions;
   if (track === 'ccar-p') return ccarpQuestions;
+  if (track === 'ccao-f') return ccaoQuestions;
   return ccarQuestions;
 }
 
 export function getTrackDomainNames(track: TrackType): Record<number, string> {
   if (track === 'ccdv-f') return CCDV_DOMAIN_NAMES;
   if (track === 'ccar-p') return CCARP_DOMAIN_NAMES;
+  if (track === 'ccao-f') return CCAO_DOMAIN_NAMES;
   return CCAR_DOMAINS;
 }
 
@@ -158,7 +161,8 @@ export function useQuiz() {
     if (mode === 'study') {
       selectedQuestions = selectedQuestions.filter(q => domains.includes(q.domain));
     } else if (mode === 'exam') {
-      selectedQuestions = selectedQuestions.sort(() => 0.5 - Math.random()).slice(0, 60);
+      const examSliceCount = state.track === 'ccao-f' ? 40 : 60;
+      selectedQuestions = selectedQuestions.sort(() => 0.5 - Math.random()).slice(0, examSliceCount);
     } else if (mode === 'review') {
       selectedQuestions = [...allQuestions];
     }
