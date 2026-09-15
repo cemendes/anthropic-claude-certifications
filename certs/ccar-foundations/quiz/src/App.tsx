@@ -117,7 +117,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-[850px] mx-auto p-4 md:p-6 lg:p-8">
+      <main className={`mx-auto p-4 md:p-6 lg:p-8 transition-all duration-300 ${state.showExplanation ? 'max-w-[850px] lg:max-w-7xl xl:max-w-[1440px]' : 'max-w-[850px] lg:max-w-5xl'}`}>
         <div className="mb-6 flex justify-between items-center">
           <h2 className="text-xl font-semibold">
             {state.mode === 'exam' ? 'Exam Simulation' : 'Study Mode'} ({getModeLabel()})
@@ -126,8 +126,8 @@ function App() {
 
         <ProgressBar current={answeredCount} total={state.questions.length} />
 
-        <div className="mt-8 flex flex-col md:flex-row gap-8">
-          <div className="flex-1 flex flex-col gap-6">
+        <div className="mt-8 flex flex-col lg:flex-row gap-8 items-start">
+          <div className="flex-1 min-w-0 w-full flex flex-col gap-6">
             <QuestionCard 
               question={currentQuestion}
               selectedAnswer={state.answers[currentQuestion.id]}
@@ -135,10 +135,13 @@ function App() {
               showFeedback={state.showExplanation}
             />
             
+            {/* Mobile/Tablet (< lg): inline explanation below question */}
             {state.showExplanation && (
-              <Explanation 
-                question={currentQuestion}
-              />
+              <div className="lg:hidden">
+                <Explanation 
+                  question={currentQuestion}
+                />
+              </div>
             )}
 
             <QuestionNav 
@@ -156,7 +159,7 @@ function App() {
             />
           </div>
 
-          <div className="w-full md:w-64 shrink-0">
+          <div className={`w-full shrink-0 flex flex-col gap-6 ${state.showExplanation ? 'lg:w-[480px] xl:w-[560px] 2xl:w-[620px]' : 'lg:w-72 xl:w-80'}`}>
             {state.mode === 'study' ? (
               <DomainFilter 
                 track={state.track}
@@ -168,6 +171,15 @@ function App() {
               />
             ) : (
               <QuestionGrid state={state} onJump={jumpToQuestion} />
+            )}
+
+            {/* Desktop (>= lg): explanation appears on the right hand side */}
+            {state.showExplanation && (
+              <div className="hidden lg:block lg:sticky lg:top-20">
+                <Explanation 
+                  question={currentQuestion}
+                />
+              </div>
             )}
           </div>
         </div>
