@@ -159,18 +159,23 @@ function App() {
             />
           </div>
 
-          <div className={`w-full shrink-0 flex flex-col gap-6 ${state.showExplanation ? 'lg:w-[480px] xl:w-[560px] 2xl:w-[620px]' : 'lg:w-72 xl:w-80'}`}>
+          <div className={`w-full shrink-0 flex flex-col gap-8 ${state.showExplanation ? 'lg:w-[480px] xl:w-[560px] 2xl:w-[620px]' : 'lg:w-72 xl:w-80'}`}>
             {state.mode === 'study' ? (
               <DomainFilter 
                 track={state.track}
                 selectedDomains={state.selectedDomains} 
+                showExplanation={state.showExplanation}
                 onChange={(domains) => {
                   resetQuiz();
                   startQuiz('study', domains);
                 }} 
               />
             ) : (
-              <QuestionGrid state={state} onJump={jumpToQuestion} />
+              <QuestionGrid 
+                state={state} 
+                onJump={jumpToQuestion} 
+                showExplanation={state.showExplanation}
+              />
             )}
 
             {/* Desktop (>= lg): explanation appears on the right hand side */}
