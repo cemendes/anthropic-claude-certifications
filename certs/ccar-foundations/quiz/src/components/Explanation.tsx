@@ -50,7 +50,7 @@ export const Explanation: React.FC<Props> = ({ question }) => {
   const segments = parseExplanation(rawExplanation);
 
   return (
-    <div className="bg-card-2 border border-border border-t-[4px] border-t-correct rounded-xl shadow-lg mt-6 overflow-hidden">
+    <div className="bg-card-2 border border-border border-t-[4px] border-t-correct rounded-xl shadow-lg overflow-hidden">
       <div className="p-6 md:p-8 flex flex-col gap-6">
         <div className="flex items-center gap-2 text-correct">
           <span className="material-symbols-outlined text-xl">lightbulb</span>
